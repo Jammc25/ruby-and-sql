@@ -2,8 +2,8 @@ class CreateActivities < ActiveRecord::Migration[7.1]
   def change
     create_table :activities do |t|
       t.integer "salesperson_id"
-      t.integer "company_id"
-      t.string "note"
+      t.integer "contact_id"
+      t.text  "note"
       t.timestamps
     end
   end

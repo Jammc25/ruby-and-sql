@@ -17,20 +17,35 @@ Activity.destroy_all
 # 1. insert 3 rows in the activities table with relationships to
 # a single salesperson and 2 different contacts
 
-puts "There are #{Activity.all.count} activities"
+p "Activities: #{Activity.all.count}"
 
-me = Salesperson.find_by({"first_name" => "Jim", "last_name" => "Halpert"})
-tim = Contact.find_by({"first_name" => "Tim", "last_name" => "Cook"})
+jim = Salesperson.find_by({"first_name" => "Jim", "last_name" => "Halpert"})
+cook = Contact.find_by({"first_name" => "Tim", "last_name" => "Cook"})
+bezos = Contact.find_by({"first_name" => "Jeff", "last_name" => "Bezos"})
+
+p jim.id
+p cook.id
+p bezos.id
 
 activity = Activity.new
-#p activity
-activity["salesperson_id"] = me["id"]
-activity["contact_id"] = tim["id"]
-activity["note"] = "Made a phone call"
+activity.salesperson_id = jim.id
+activity.company_id = cook.id
+activity.note = "Made a phone call"
 activity.save
-p activity
 
-puts "There are #{Activity.all.count} activities"
+activity = Activity.new
+activity.salesperson_id = jim["id"]
+activity.company_id = cook["id"]
+activity.note = "Met for coffee"
+activity.save
+
+activity = Activity.new
+activity.salesperson_id = jim["id"]
+activity.company_id = bezos["id"]
+activity.note = "Worked out at the gym"
+activity.save
+
+p "Activities: #{Activity.all.count}"
 
 # 2. Display all the activities between the salesperson used above
 # and one of the contacts (sample output below):
